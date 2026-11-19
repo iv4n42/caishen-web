@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caishen — Caja para tu negocio</title>
+<meta name="description" content="Caishen es la caja para pymes cubanas: vende, cobra en varias monedas y cuadra el cierre sin internet. Para PC con Windows y tablet Android. Pago único, sin mensualidad.">
+<meta property="og:title" content="Caishen — Caja para tu negocio">
+<meta property="og:description" content="Vende, cobra en CUP, USD o MLC y cuadra la caja. Sin internet, sin mensualidad.">
+<meta property="og:image" content="img/compartir.png">
+<meta name="theme-color" content="#2A140F">
+<link rel="icon" href="img/caishen-icono.svg" type="image/svg+xml">
+<style>
+  /* Sin fuentes externas ni librerías: la página tiene que cargar rápido con datos móviles. */
+  :root {
+    --laca: #A8201A;
+    --laca-oscura: #7A1E16;
+    --tierra: #2A140F;
+    --tierra-media: #3B1D17;
+    --tierra-clara: #5A2C23;
+    --oro: #D4A53C;
+    --oro-brillo: #E6C27A;
+    --oro-texto: #7D5410;
+    --crema: #FBF6EC;
+    --crema-2: #F8EEDB;
+    --papel: #FFFFFF;
+    --carbon: #2E2522;
+    --carbon-suave: #6E625B;
+    --borde: #E6DCD0;
+    --verde: #157347;
+    --radio: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--crema);
+    color: var(--carbon);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--laca-oscura); }
+  .envoltura { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---------- Cabecera ---------- */
+  .cabecera { background: var(--tierra); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #ffffff14; }
+  .cabecera .envoltura { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .marca { display: flex; align-items: center; gap: 10px; color: var(--oro); text-decoration: none; font-weight: 700; font-size: 20px; letter-spacing: .3px; }
+  .marca img { width: 34px; height: 34px; }
+  .menu { display: flex; gap: 22px; align-items: center; }
+  .menu a { color: #f3e6cf; text-decoration: none; font-size: 15px; }
+  .menu a:hover { color: var(--oro-brillo); }
+  .menu .solo-ancho { display: none; }
+
+  /* ---------- Botones ---------- */
+  .boton {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 13px 22px; border-radius: 999px; font-weight: 650; font-size: 16px;
+    text-decoration: none; border: 2px solid transparent; cursor: pointer; line-height: 1.2;
+  }
+  .boton-oro { background: var(--oro); color: var(--tierra); }
+  .boton-oro:hover { background: var(--oro-brillo); }
+  .boton-borde { border-color: #d4a53c88; color: var(--oro-brillo); }
+  .boton-borde:hover { border-color: var(--oro); }
+  .boton-laca { background: var(--laca); color: #fff; }
+  .boton-laca:hover { background: var(--laca-oscura); }
+  .boton-chico { padding: 8px 16px; font-size: 14px; }
+  .boton svg { width: 20px; height: 20px; flex: none; }
+
+  /* ---------- Portada ---------- */
+  .portada {
+    background:
+      radial-gradient(900px 500px at 85% 10%, #a8201a55, transparent 60%),
+      linear-gradient(180deg, var(--tierra) 0%, var(--tierra-media) 100%);
+    color: #f6ead6;
+    padding: 48px 0 64px;
+    overflow: hidden;
+  }
+  .portada .envoltura { display: grid; gap: 36px; align-items: center; }
+  .portada h1 { font-size: 36px; line-height: 1.15; margin: 0 0 16px; color: #fff; letter-spacing: -.3px; }
+  .portada h1 em { font-style: normal; color: var(--oro); }
+  .portada p.lema { font-size: 19px; margin: 0 0 28px; color: #eadbc2; max-width: 34em; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .nota-prueba { margin-top: 16px; font-size: 14px; color: #cdb995; }
+  .moneda-grande { width: min(300px, 50vw); margin: 0 auto; filter: drop-shadow(0 18px 40px #00000066); animation: flotar 6s ease-in-out infinite; }
+  .ideogramas { text-align: center; color: var(--oro); letter-spacing: 10px; font-size: 15px; margin-top: 14px; opacity: .8; }
+  @keyframes flotar { 50% { transform: translateY(-8px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce) { .moneda-grande { animation: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- Secciones ---------- */
+  section { padding: 64px 0; scroll-margin-top: 60px; }
+  .titulo-seccion { font-size: 28px; line-height: 1.2; margin: 0 0 10px; color: var(--tierra-media); }
+  .entrada { color: var(--carbon-suave); margin: 0 0 32px; max-width: 40em; }
+  .sobre-blanco { background: var(--papel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); }
+
+  .rejilla { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  .rejilla > * { min-width: 0; }
+  .tarjeta { background: var(--papel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 22px; }
+  .sobre-blanco .tarjeta { background: var(--crema); }
+  .tarjeta h3 { margin: 12px 0 6px; font-size: 18px; color: var(--tierra-media); }
+  .tarjeta p { margin: 0; color: var(--carbon-suave); font-size: 15.5px; }
+  .icono { width: 44px; height: 44px; border-radius: 12px; background: var(--crema-2); display: grid; place-items: center; color: var(--laca); }
+  .sobre-blanco .icono { background: #fff; border: 1px solid var(--borde); }
+  .icono svg { width: 24px; height: 24px; }
+
+  /* ---------- Licencia ---------- */
+  .licencia { background: linear-gradient(135deg, var(--tierra-media), var(--tierra)); color: #f3e6cf; border-radius: 20px; padding: 32px 24px; display: grid; gap: 24px; }
+  .licencia h2 { color: #fff; margin: 0 0 8px; font-size: 26px; }
+  .licencia ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .licencia li { display: flex; gap: 12px; align-items: flex-start; }
+  .licencia li svg { width: 22px; height: 22px; flex: none; color: var(--oro); margin-top: 2px; }
+  .licencia strong { color: var(--oro-brillo); }
+
+  /* ---------- Descargas ---------- */
+  .descarga { display: flex; flex-direction: column; gap: 14px; }
+  .descarga-cabeza { display: flex; align-items: center; gap: 14px; }
+  .descarga-cabeza .icono { width: 52px; height: 52px; }
+  .descarga-cabeza h3 { margin: 0; }
+  .descarga-cabeza span { color: var(--carbon-suave); font-size: 14px; }
+  .datos { margin: 0; padding: 0; list-style: none; font-size: 14.5px; color: var(--carbon-suave); display: grid; gap: 4px; }
+  .datos b { color: var(--carbon); font-weight: 600; }
+  .huella { font-family: Consolas, "Courier New", monospace; font-size: 11.5px; word-break: break-all; color: var(--carbon-suave); background: var(--crema); border: 1px dashed var(--borde); border-radius: 8px; padding: 8px 10px; }
+  .descarga .boton { align-self: stretch; }
+  .alternativa { font-size: 14px; color: var(--carbon-suave); margin-top: 18px; }
+
+  /* ---------- Pasos ---------- */
+  .pasos { counter-reset: paso; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  /* Bloque con el número posicionado, no flex: con flex el texto y cada <b> pasan a ser piezas
+     separadas que no se parten en líneas, y en el teléfono el paso se sale de la tarjeta. */
+  .pasos li { counter-increment: paso; position: relative; padding-left: 38px; font-size: 15.5px; min-height: 26px; }
+  .pasos li::before { content: counter(paso); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%; background: var(--laca); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+
+  /* ---------- Novedades ---------- */
+  .version { border-left: 3px solid var(--oro); padding: 4px 0 4px 18px; margin-bottom: 26px; }
+  .version h3 { margin: 0; font-size: 19px; color: var(--tierra-media); }
+  .version time { font-size: 14px; color: var(--carbon-suave); }
+  .version ul { margin: 10px 0 0; padding-left: 20px; }
+  .version li { margin-bottom: 6px; }
+  .etiqueta { display: inline-block; font-size: 12px; font-weight: 700; background: var(--verde); color: #fff; border-radius: 999px; padding: 2px 10px; margin-left: 8px; vertical-align: 2px; }
+  details { border: 1px solid var(--borde); border-radius: var(--radio); background: var(--papel); padding: 4px 18px; }
+  details + details { margin-top: 10px; }
+  summary { cursor: pointer; font-weight: 600; padding: 12px 0; color: var(--tierra-media); }
+  details[open] summary { border-bottom: 1px solid var(--borde); margin-bottom: 14px; }
+  details .version:last-child { margin-bottom: 14px; }
+
+  /* ---------- Preguntas ---------- */
+  .faq details p { margin: 0 0 14px; color: var(--carbon-suave); }
+
+  /* ---------- Contacto ---------- */
+  .contacto { text-align: center; background: radial-gradient(700px 300px at 50% 0%, #a8201a33, transparent 70%), var(--tierra); color: #f3e6cf; }
+  .contacto h2 { color: #fff; font-size: 28px; margin: 0 0 10px; }
+  .contacto p { margin: 0 auto 26px; max-width: 32em; }
+  .pie { background: #1b0d0a; color: #a8968a; font-size: 14px; padding: 26px 0; }
+  .pie .envoltura { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
+  .pie a { color: #d8c4a5; }
+
+  @media (min-width: 720px) {
+    .menu .solo-ancho { display: inline; }
+    .portada { padding: 72px 0 88px; }
+    .portada .envoltura { grid-template-columns: 1.25fr .75fr; }
+    .portada h1 { font-size: 50px; }
+    .rejilla.tres { grid-template-columns: repeat(2, 1fr); }
+    .rejilla.dos { grid-template-columns: repeat(2, 1fr); }
+    .licencia { grid-template-columns: 1fr 1.2fr; padding: 44px; align-items: center; }
+    .titulo-seccion { font-size: 34px; }
+  }
+  @media (min-width: 980px) {
+    .rejilla.tres { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Íconos dibujados una sola vez y reusados con <use>: evita repetir trazos y mantiene la página liviana. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sin-internet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.8a15 15 0 0 1 4.2-2.6M10.7 5a15 15 0 0 1 11.3 3.8M5 12.5a10 10 0 0 1 5.2-2.7M16.8 10.7a10 10 0 0 1 2.2 1.8M8.5 16.1a5 5 0 0 1 7 0M12 20h.01M3 3l18 18"/></symbol>
+    <symbol id="i-monedas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="M15.5 9.3A6 6 0 1 1 9.3 15.5"/><path d="M9 6.5v5M7 8h3.2a1 1 0 0 1 0 2H7.8"/></symbol>
+    <symbol id="i-cierre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/><path d="m14.5 16 1.5 1.5 3-3"/></symbol>
+    <symbol id="i-inventario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+    <symbol id="i-candado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1"/></symbol>
+    <symbol id="i-cuentas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16M6 11V7a6 6 0 0 1 12 0v4M5 11l1 9h12l1-9"/><path d="M10 15h4"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
+    <symbol id="i-reporte" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+    <symbol id="i-equipos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="13" height="10" rx="1.5"/><path d="M6 18h5M8.5 14v4"/><rect x="16" y="8" width="6" height="12" rx="1.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-windows" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10.5 4.4v7.1H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7.1L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24" fill="currentColor"><path d="M7.2 9h9.6a1 1 0 0 1 1 1v7a1.5 1.5 0 0 1-1.5 1.5H16V21a1.2 1.2 0 0 1-2.4 0v-2.5h-3.2V21A1.2 1.2 0 0 1 8 21v-2.5h-.3A1.5 1.5 0 0 1 6.2 17v-7a1 1 0 0 1 1-1Zm-2.8 0A1.2 1.2 0 0 1 5.6 10.2v5a1.2 1.2 0 0 1-2.4 0v-5A1.2 1.2 0 0 1 4.4 9Zm15.2 0a1.2 1.2 0 0 1 1.2 1.2v5a1.2 1.2 0 0 1-2.4 0v-5A1.2 1.2 0 0 1 19.6 9ZM8.3 3.2l1 1.6a6 6 0 0 1 5.4 0l1-1.6a.4.4 0 0 1 .7.4l-1 1.6A5.5 5.5 0 0 1 18 8H6a5.5 5.5 0 0 1 2.6-2.8l-1-1.6a.4.4 0 0 1 .7-.4ZM9.5 6.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4Zm5 0a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4Z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
+    <symbol id="i-bajar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+  </defs>
+</svg>
+
+<header class="cabecera">
+  <div class="envoltura">
+    <a class="marca" href="#inicio"><img src="img/caishen-icono.svg" alt="">Caishen</a>
+    <nav class="menu">
+      <a class="solo-ancho" href="#funciones">Funciones</a>
+      <a class="solo-ancho" href="#licencia">Licencia</a>
+      <a class="solo-ancho" href="#novedades">Novedades</a>
+      <a class="boton boton-oro boton-chico" href="#descargar">Descargar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- ===================== PORTADA ===================== -->
+  <div class="portada">
+    <div class="envoltura">
+      <div>
+        <h1>La caja de tu negocio, <em>en orden</em>. Sin internet.</h1>
+        <p class="lema">Caishen vende, cobra en CUP, USD o MLC, da el vuelto exacto y te cuadra el cierre del día. Funciona en la PC con Windows y en la tablet Android, aunque se vaya la conexión.</p>
+        <div class="acciones">
+          <a class="boton boton-oro" href="#descargar"><svg><use href="#i-bajar"/></svg>Descargar gratis</a>
+          <a class="boton boton-borde whatsapp" href="#contacto"><svg><use href="#i-whatsapp"/></svg>Pedir mi licencia</a>
+        </div>
+        <p class="nota-prueba">Pruébalo 7 días con todas las funciones, sin clave y sin dar datos.</p>
+      </div>
+      <div>
+        <img class="moneda-grande" src="img/caishen-moneda.svg" alt="Moneda china con los caracteres 招財進寶" width="300" height="300">      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FUNCIONES ===================== -->
+  <section id="funciones">
+    <div class="envoltura">
+      <h2 class="titulo-seccion">Hecho para cómo se vende aquí</h2>
+      <p class="entrada">Varias monedas, tasas que cambian, apagones y cajeros que rotan. Caishen se pensó para eso, no se adaptó de un programa de otro país.</p>
+
+      <div class="rejilla tres">
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-sin-internet"/></svg></div>
+          <h3>Funciona sin internet</h3>
+          <p>Todo se guarda en el equipo. Si se cae la conexión, sigues vendiendo como si nada. Sin servidores ni cuentas en la nube.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-monedas"/></svg></div>
+          <h3>Cobra en varias monedas</h3>
+          <p>CUP, USD, MLC y transferencia con tus propias tasas. El cliente puede pagar mezclando monedas y el vuelto sale calculado.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-cierre"/></svg></div>
+          <h3>Cierre que cuadra</h3>
+          <p>Al cerrar el turno cuentas la gaveta y Caishen te dice qué falta o qué sobra en cada moneda. El cierre sale en PDF, listo para mandar por WhatsApp.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-inventario"/></svg></div>
+          <h3>Inventario al día</h3>
+          <p>Cada venta descuenta el stock. Registras entradas de mercancía con su costo y las bajas por rotura o vencimiento, y ves qué se está agotando.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-candado"/></svg></div>
+          <h3>Control de los cajeros</h3>
+          <p>Cada uno entra con su PIN. Sacar dinero o anular una venta puede pedir el PIN del dueño, y siempre queda anotado quién hizo qué.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-reporte"/></svg></div>
+          <h3>Ganancia real</h3>
+          <p>Reportes de ventas, ganancia por producto y movimientos de mercancía, en PDF o Excel. Con el costo de verdad y las mermas descontadas.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-cuentas"/></svg></div>
+          <h3>Cuentas abiertas</h3>
+          <p>Para cafeterías y restaurantes: abre una cuenta por mesa o cliente, ve agregando lo que piden y cóbrala al final.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-ticket"/></svg></div>
+          <h3>Tickets impresos</h3>
+          <p>Imprime el ticket al cobrar en una impresora térmica de 58 u 80 mm. Es opcional: sin impresora, Caishen funciona igual.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="icono"><svg><use href="#i-equipos"/></svg></div>
+          <h3>PC o tablet</h3>
+          <p>El mismo programa en Windows y en tablets Android de 10 pulgadas o más. Elige el equipo que ya tienes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LICENCIA ===================== -->
+  <section id="licencia" style="padding-top:0">
+    <div class="envoltura">
+      <div class="licencia">
+        <div>
+          <h2>Pagas una vez. Es tuyo.</h2>
+          <p style="margin:0">Sin mensualidades ni renovaciones. La licencia queda en tu equipo para siempre.</p>
+        </div>
+        <ul>
+          <li><svg><use href="#i-check"/></svg><span><strong>7 días de prueba</strong> con todo funcionando. Si no te convence, no pagas nada.</span></li>
+          <li><svg><use href="#i-check"/></svg><span>Al terminar la prueba <strong>no se pierde nada</strong>: tus datos quedan y los puedes seguir consultando.</span></li>
+          <li><svg><use href="#i-check"/></svg><span>La clave llega <strong>por WhatsApp</strong>, en un archivo que abres desde Caishen. Sin internet en el negocio.</span></li>
+          <li><svg><use href="#i-check"/></svg><span>Una licencia <strong>por equipo</strong>. Las actualizaciones son gratis.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DESCARGAS ===================== -->
+  <section id="descargar" class="sobre-blanco">
+    <div class="envoltura">
+      <h2 class="titulo-seccion">Descargar Caishen 1.8</h2>
+      <p class="entrada">Baja el instalador de tu equipo. Si ya tienes Caishen, instala encima: tus datos y tu licencia se conservan.</p>
+
+      <div class="rejilla dos">
+        <div class="tarjeta descarga">
+          <div class="descarga-cabeza">
+            <div class="icono"><svg><use href="#i-windows"/></svg></div>
+            <div><h3>Windows</h3><span>PC o laptop</span></div>
+          </div>
+          <ul class="datos">
+            <li><b>Archivo:</b> Instalar-Caishen-1.8.exe</li>
+            <li><b>Tamaño:</b> 87 MB</li>
+            <li><b>Requiere:</b> Windows 10 o 11 de 64 bits</li>
+          </ul>
+          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.8/Instalar-Caishen-1.8.exe"><svg><use href="#i-bajar"/></svg>Descargar para Windows</a>
+          <details>
+            <summary>Cómo instalar</summary>
+            <ol class="pasos">
+              <li>Abre el archivo descargado.</li>
+              <li>Si Windows dice «Windows protegió su PC», toca <b>Más información</b> y luego <b>Ejecutar de todas formas</b>. Sale porque el instalador es nuevo y Windows todavía no lo conoce.</li>
+              <li>Sigue los pasos del instalador. Al final, Caishen queda en el menú Inicio y en el Escritorio.</li>
+            </ol>
+            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: b5a03496bcc88cee81e1cb96243866e1e5d8bf62519ea213a6dbe99d3b1cc18b</p>
+          </details>
+        </div>
+
+        <div class="tarjeta descarga">
+          <div class="descarga-cabeza">
+            <div class="icono"><svg><use href="#i-android"/></svg></div>
+            <div><h3>Android</h3><span>Tablet de 10" o más, en horizontal</span></div>
+          </div>
+          <ul class="datos">
+            <li><b>Archivo:</b> Caishen-1.8.apk</li>
+            <li><b>Tamaño:</b> 56 MB</li>
+            <li><b>Requiere:</b> tablet Android (no funciona en teléfonos)</li>
+          </ul>
+          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.8/Caishen-1.8.apk"><svg><use href="#i-bajar"/></svg>Descargar para Android</a>
+          <details>
+            <summary>Cómo instalar</summary>
+            <ol class="pasos">
+              <li>Abre el archivo descargado desde la tablet.</li>
+              <li>Si Android pide permiso para instalar apps de este origen, actívalo y vuelve atrás.</li>
+              <li>Toca <b>Instalar</b>. Caishen aparece con el ícono de la moneda.</li>
+            </ol>
+            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: fe1d3e6834ba28b17b5198b579e2a5a3354c74768f8c2fbc7d9adf431dc361af</p>
+          </details>
+        </div>
+      </div>
+
+      <p class="alternativa">¿Los datos te salen caros? <a class="whatsapp" href="#contacto">Pídenos el instalador por WhatsApp</a> y te lo mandamos. También puedes leer el <a href="manual.html">manual completo</a> antes de instalar.</p>
+    </div>
+  </section>
+
+  <!-- ===================== NOVEDADES ===================== -->
+  <section id="novedades">
+    <div class="envoltura">
+      <h2 class="titulo-seccion">Novedades</h2>
+      <p class="entrada">Caishen mejora con lo que piden los negocios que lo usan. Esto es lo que trae cada versión.</p>
+
+      <div class="version">
+        <h3>Caishen 1.8 <span class="etiqueta">Actual</span></h3>
+        <time datetime="2026-11-15">15 de noviembre de 2026</time>
+        <ul>
+          <li>Anular una venta ahora pide confirmación y, si quien anula es cajero, el PIN del administrador. Se puede apagar en Configuración.</li>
+          <li>Queda registrado qué administrador autorizó cada anulación.</li>
+          <li>En el cierre, la columna de anuladas muestra con signo si el dinero salió o entró a la caja.</li>
+          <li>Las observaciones del cierre se leen bien en modo oscuro.</li>
+          <li>Los reportes exportados llevan la hora local en el nombre.</li>
+        </ul>
+      </div>
+
+      <!-- Versiones anteriores: la 1.8 es la de salida al mercado. Cuando salga la siguiente, su
+           bloque .version pasa aquí dentro y se borra el párrafo de aviso. -->
+      <details>
+        <summary>Versiones anteriores</summary>
+        <p class="alternativa" style="margin:0 0 14px">La 1.8 es la primera versión pública. Aquí aparecerán las anteriores cuando salgan actualizaciones.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== PREGUNTAS ===================== -->
+  <section id="preguntas" class="sobre-blanco faq">
+    <div class="envoltura">
+      <h2 class="titulo-seccion">Preguntas frecuentes</h2>
+      <p class="entrada">Lo que más nos preguntan antes de empezar.</p>
+
+      <details>
+        <summary>¿Necesito internet?</summary>
+        <p>No. Caishen funciona completo sin conexión. Solo hace falta para bajar el instalador, y eso también te lo podemos mandar por WhatsApp.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa cuando terminan los 7 días de prueba?</summary>
+        <p>Caishen pasa a solo lectura: no deja vender, pero tus productos, ventas y cierres siguen ahí. Cuando activas la licencia sigues donde lo dejaste.</p>
+      </details>
+      <details>
+        <summary>¿Puedo usarlo en el teléfono?</summary>
+        <p>No. La pantalla del teléfono es muy chica para vender cómodo. Caishen está hecho para PC con Windows y para tablets Android de 10 pulgadas o más, en horizontal.</p>
+      </details>
+      <details>
+        <summary>¿Y si se me rompe el equipo?</summary>
+        <p>Cada cierre de caja sale en PDF y se puede guardar en un pendrive o mandar por WhatsApp, así el historial no se queda solo en el equipo. Para el equipo nuevo nos pides la clave de ese equipo.</p>
+      </details>
+      <details>
+        <summary>¿Mis datos están seguros?</summary>
+        <p>Los datos se guardan cifrados en tu equipo y no salen de ahí. Nadie más que tú los ve.</p>
+      </details>
+      <details>
+        <summary>¿Las actualizaciones se pagan?</summary>
+        <p>No. Bajas la versión nueva, la instalas encima y tu licencia sigue valiendo.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACTO ===================== -->
+  <section id="contacto" class="contacto">
+    <div class="envoltura">
+      <h2>¿Listo para ordenar tu caja?</h2>
+      <p>Escríbenos por WhatsApp para pedir tu licencia, el instalador o resolver cualquier duda.</p>
+      <a class="boton boton-oro whatsapp" href="#contacto"><svg><use href="#i-whatsapp"/></svg>Escribir por WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <span>© 2026 Caishen · Caja para pymes</span>
+    <span><a href="manual.html">Manual</a> · <a href="#descargar">Descargar</a> · <a href="#preguntas">Preguntas</a></span>
+  </div>
+</footer>
+
+<script>
+  // Número de WhatsApp para todos los botones de contacto: solo dígitos, con el 53 delante.
+  // Vacío = los botones llevan a la sección de contacto en vez de abrir WhatsApp.
+  var WHATSAPP = "";
+  var MENSAJE = "Hola, me interesa Caishen.";
+
+  if (WHATSAPP) {
+    document.querySelectorAll("a.whatsapp").forEach(function (a) {
+      a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MENSAJE);
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+  }
+</script>
+</body>
+</html>

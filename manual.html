@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caishen — Manual completo</title>
+<style>
+  :root{
+    --tinta:#2E2522; --tinta-suave:#6E625B; --papel:#FFFFFF; --papel-alt:#F8F4EE;
+    --borde:#E6DCD0; --marca:#7A1E16; --marca-suave:#F8EEDB;
+    --alerta:#B4470A; --alerta-fondo:#FFF0E0; --peligro:#A32A26; --peligro-fondo:#FCEFEE;
+    --ok:#1E6F3C; --ok-fondo:#EDF7F0;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--papel); color:var(--tinta);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.65; font-size:16px;
+  }
+  .envoltorio{max-width:none; padding:0}
+  header.portada{
+    background:var(--marca); color:#fff; padding:3rem 1.5rem 2.5rem;
+  }
+  header.portada .caja{max-width:820px; margin:0 auto}
+  header.portada h1{margin:0 0 .3rem; font-size:2.4rem; letter-spacing:-.02em}
+  header.portada p{margin:.2rem 0; opacity:.92}
+  .beta{
+    display:inline-block; margin-top:1rem; padding:.45rem .8rem; border-radius:6px;
+    background:rgba(255,255,255,.16); font-size:.85rem; font-weight:600;
+  }
+  main{max-width:820px; margin:0 auto; padding:0 1.5rem 4rem}
+  h2{
+    font-size:1.55rem; margin:3rem 0 .2rem; padding-top:1.6rem;
+    border-top:3px solid var(--marca); letter-spacing:-.01em;
+  }
+  h2 .num{color:var(--marca); font-variant-numeric:tabular-nums}
+  h3{font-size:1.15rem; margin:2rem 0 .4rem}
+  h4{font-size:1rem; margin:1.4rem 0 .3rem; color:var(--tinta-suave)}
+  p,ul,ol{margin:.6rem 0}
+  ul,ol{padding-left:1.3rem}
+  li{margin:.3rem 0}
+  code{
+    background:var(--papel-alt); border:1px solid var(--borde); border-radius:4px;
+    padding:.1rem .35rem; font-size:.88em;
+  }
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.92rem; display:block; overflow-x:auto}
+  th,td{border:1px solid var(--borde); padding:.5rem .65rem; text-align:left; vertical-align:top}
+  th{background:var(--papel-alt); font-weight:600}
+  .nota,.aviso,.peligro,.bien{
+    border-left:4px solid; border-radius:0 6px 6px 0; padding:.85rem 1rem; margin:1.2rem 0;
+  }
+  .nota{border-color:var(--marca); background:var(--marca-suave)}
+  .aviso{border-color:var(--alerta); background:var(--alerta-fondo)}
+  .peligro{border-color:var(--peligro); background:var(--peligro-fondo)}
+  .bien{border-color:var(--ok); background:var(--ok-fondo)}
+  .nota strong:first-child,.aviso strong:first-child,.peligro strong:first-child,.bien strong:first-child{
+    display:block; margin-bottom:.2rem;
+  }
+  nav.indice{background:var(--papel-alt); border:1px solid var(--borde); border-radius:8px; padding:1.2rem 1.5rem; margin:2rem 0}
+  nav.indice h2{border:none; margin:0 0 .6rem; padding:0; font-size:1.2rem}
+  nav.indice ol{columns:2; column-gap:2rem; padding-left:1.1rem; margin:0}
+  nav.indice a{color:var(--marca); text-decoration:none}
+  nav.indice a:hover{text-decoration:underline}
+  .pasos{counter-reset:paso; list-style:none; padding-left:0}
+  .pasos>li{counter-increment:paso; position:relative; padding-left:2.4rem; margin:1rem 0}
+  .pasos>li::before{
+    content:counter(paso); position:absolute; left:0; top:.05rem;
+    width:1.7rem; height:1.7rem; border-radius:50%; background:var(--marca); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:.85rem; font-weight:700;
+  }
+  .glosario dt{font-weight:600; margin-top:.9rem}
+  .glosario dd{margin:.1rem 0 0 0; color:var(--tinta-suave)}
+  footer{border-top:1px solid var(--borde); margin-top:3rem; padding-top:1.2rem; color:var(--tinta-suave); font-size:.88rem}
+  @media print{
+    header.portada{background:none; color:var(--tinta); border-bottom:3px solid var(--marca)}
+    .beta{background:var(--alerta-fondo); color:var(--alerta)}
+    h2{break-after:avoid} h3{break-after:avoid} table{break-inside:auto}
+    tr{break-inside:avoid}
+    nav.indice{break-after:page}
+  }
+  @media (max-width:640px){ nav.indice ol{columns:1} header.portada h1{font-size:1.9rem} }
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="caja">
+    <h1>Caishen</h1>
+    <p>Manual completo — caja registradora para pymes</p>
+    <p>Versión 1.0 · 26 de octubre de 2026</p>
+  </div>
+</header>
+
+<main>
+
+<div class="nota">
+  <strong>Cómo leer este manual</strong>
+  No hace falta leerlo entero. Si vas a usar la app por primera vez, lee del capítulo 1 al 5 y con
+  eso ya puedes vender. El resto está para consultar cuando te haga falta. El capítulo 14 responde
+  las preguntas que más se repiten, y el 15 es el glosario.
+</div>
+
+<nav class="indice">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#c1">Qué es y qué no es</a></li>
+    <li><a href="#c2">Instalación y activación</a></li>
+    <li><a href="#c3">Usuarios y roles</a></li>
+    <li><a href="#c4">Configuración inicial</a></li>
+    <li><a href="#c5">El turno, de principio a fin</a></li>
+    <li><a href="#c6">Vender</a></li>
+    <li><a href="#c7">Cobrar</a></li>
+    <li><a href="#c8">Movimientos de caja</a></li>
+    <li><a href="#c9">Cerrar la caja</a></li>
+    <li><a href="#c10">Productos e inventario</a></li>
+    <li><a href="#c11">Cuentas abiertas</a></li>
+    <li><a href="#c12">Panel, alertas y reportes</a></li>
+    <li><a href="#c13">Respaldos y cierres</a></li>
+    <li><a href="#c14">Problemas frecuentes</a></li>
+    <li><a href="#c15">Glosario</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<h2 id="c1"><span class="num">1.</span> Qué es y qué no es</h2>
+
+<p>Caishen es una caja registradora para un negocio chico: un mercado, una cafetería, una
+bodega, un puesto. Registra lo que vendes, controla cuánto te queda, te dice cuánto ganaste y te
+obliga a cuadrar la gaveta al final del día.</p>
+
+<h3>Funciona sin internet. Siempre.</h3>
+<p>No hay servidor, no hay nube, no hay cuenta que crear. Todo vive en la computadora o la tablet
+donde la instalas, en una base de datos cifrada. Eso tiene dos consecuencias que conviene entender
+desde el principio:</p>
+<ul>
+  <li><strong>Nadie puede ver tus datos</strong> más que quien tenga acceso físico al equipo y un
+  usuario de la app.</li>
+  <li><strong>Nadie puede recuperártelos si el equipo se pierde</strong>, salvo que tengas los
+  respaldos que la app genera. Ver el capítulo 13.</li>
+</ul>
+
+<h3>Lo que la app hace</h3>
+<table>
+  <tr><th>Sí hace</th><th>No hace</th></tr>
+  <tr>
+    <td>Vender, cobrar en varias monedas y medios de pago</td>
+    <td>Facturación fiscal o timbrado</td>
+  </tr>
+  <tr>
+    <td>Controlar existencias y avisar cuando algo se acaba</td>
+    <td>Descuentos y promociones</td>
+  </tr>
+  <tr>
+    <td>Cuadrar la caja y registrar el descuadre</td>
+    <td>Devoluciones (se resuelven anulando la venta)</td>
+  </tr>
+  <tr>
+    <td>Calcular ganancia y margen por producto</td>
+    <td>Cuentas por cobrar o fiado con seguimiento</td>
+  </tr>
+  <tr>
+    <td>Cuentas abiertas: mesas, pedidos y clientes que pagan al final</td>
+    <td>Conectarse con otro sistema o con el banco</td>
+  </tr>
+  <tr>
+    <td>Exportar reportes a Excel y PDF</td>
+    <td>Sincronizar sola entre dos equipos</td>
+  </tr>
+</table>
+
+<div class="aviso">
+  <strong>Una instalación, un negocio</strong>
+  Cada instalación es independiente. Si tienes dos locales, son dos instalaciones con sus propios
+  datos. La app genera archivos para que puedas llevar los cierres de uno al otro a mano, pero no se
+  sincronizan solas.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c2"><span class="num">2.</span> Instalación y activación</h2>
+
+<h3>Instalar</h3>
+<ol class="pasos">
+  <li>Doble clic en <code>Instalar-Caishen.exe</code>.</li>
+  <li>Windows puede avisar "Windows protegió su PC", porque la app todavía no está firmada
+  digitalmente. Elige <em>Más información</em> y después <em>Ejecutar de todas formas</em>.</li>
+  <li>Sigue el asistente. No pide clave de administrador del equipo. Al terminar quedan el acceso
+  directo en el escritorio y, en el menú Inicio, Caishen y este manual.</li>
+</ol>
+<p>No hay que instalar nada más. El instalador trae todo adentro.</p>
+
+<h3>Actualizar desde una versión anterior</h3>
+<div class="bien">
+  <strong>No pierdes nada y no tienes que volver a activar</strong>
+  Instala la versión nueva encima de la que tienes. Tus datos no viven dentro de la carpeta del
+  programa sino aparte: al abrirla, la app actualiza sola la base de datos y sigue donde estabas.
+  Desinstalar tampoco borra tus datos.
+</div>
+
+<h3>Los primeros 7 días: prueba sin clave</h3>
+<p>Recién instalada, la app no pide clave: funciona entera durante 7 días contados desde la primera
+vez que la abres. La barra de arriba y la pantalla de entrada dicen cuántos días quedan.</p>
+<ul>
+  <li><strong>Lo que cargas durante la prueba se queda.</strong> Productos, ventas, cierres: al
+  activar sigues con todo, no empiezas de cero.</li>
+  <li><strong>Al terminar la prueba no se borra nada.</strong> La app queda en <em>solo
+  lectura</em>: el administrador puede entrar, mirar el Panel, los reportes y los cierres y
+  exportarlos, pero no se puede vender, abrir turno ni mover mercancía hasta activarla. Los cajeros
+  no pueden entrar.</li>
+</ul>
+
+<h3>Activar</h3>
+<p>Puedes activar en cualquier momento, durante la prueba o después: con el botón <em>Activar con mi
+clave</em> de la pantalla de entrada, o con <em>Activar Caishen</em> en el menú. La app muestra un
+código propio de esa máquina:</p>
+<p><code>DISP-7K4M-92XR-A3BC-D</code></p>
+<ol class="pasos">
+  <li>Copia el código (hay un botón para copiarlo) y mándamelo.</li>
+  <li>Te devuelvo la clave que corresponde a ese código.</li>
+  <li>Escríbela en la app. Queda activada para siempre en esa máquina, y desaparecen los avisos de
+  prueba.</li>
+</ol>
+
+<div class="aviso">
+  <strong>La clave sirve en un solo equipo</strong>
+  Está calculada a partir del código de esa máquina. En otra computadora no funciona, ni siquiera si
+  es tuya: hay que pedir una clave nueva con el código nuevo. Si formateas el equipo o cambias piezas
+  importantes, el código puede cambiar y hay que reactivar.
+</div>
+
+<h3>La licencia</h3>
+<p>Hay dos cosas distintas y conviene no confundirlas:</p>
+<table>
+  <tr><th></th><th>Activación</th><th>Premium</th></tr>
+  <tr><td><strong>Qué es</strong></td><td>El derecho a usar la app en ese equipo</td><td>Soporte y funciones extra</td></tr>
+  <tr><td><strong>Vence</strong></td><td>Nunca</td><td>Sí, en la fecha de la clave</td></tr>
+  <tr><td><strong>Si vence</strong></td><td>—</td><td>Sigues vendiendo igual. Solo pierdes soporte y extras</td></tr>
+</table>
+
+<div class="bien">
+  <strong>La caja nunca se apaga por una licencia vencida</strong>
+  Está decidido así a propósito. Un negocio que no puede cobrar porque se le venció algo es un
+  problema mucho más grande que cualquier cuota. Si el premium vence, la app te avisa y sigue
+  funcionando.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c3"><span class="num">3.</span> Usuarios y roles</h2>
+
+<p>La primera vez, la app te pide crear el usuario <strong>administrador</strong>: un nombre y un PIN
+de al menos 6 dígitos.</p>
+
+<div class="peligro">
+  <strong>Anota ese PIN en algún lado</strong>
+  No hay forma de recuperarlo. No hay correo de recuperación ni pregunta secreta, porque no hay
+  servidor que pueda verificar quién eres. Si se pierde el PIN del único administrador, no se puede
+  entrar a la administración de esa instalación.
+</div>
+
+<h3>Los dos roles</h3>
+<table>
+  <tr><th>Puede…</th><th>Cajero</th><th>Admin</th></tr>
+  <tr><td>Abrir y cerrar la caja</td><td>Sí</td><td>Sí</td></tr>
+  <tr><td>Vender y cobrar</td><td>Sí</td><td>Sí</td></tr>
+  <tr><td>Anular una venta del turno abierto</td><td>Sí</td><td>Sí</td></tr>
+  <tr><td>Meter dinero a la caja</td><td>Sí</td><td>Sí</td></tr>
+  <tr><td><strong>Sacar dinero de la caja</strong></td><td>Solo con el PIN de un admin</td><td>Sí</td></tr>
+  <tr><td>Registrar entrada de mercancía</td><td>Sí (queda pendiente de revisión)</td><td>Sí</td></tr>
+  <tr><td>Restar existencia a mano</td><td>No</td><td>Sí</td></tr>
+  <tr><td>Cerrar la caja descuadrada</td><td>Solo con el PIN de un admin</td><td>Sí</td></tr>
+  <tr><td>Ver el Panel, los reportes y los cierres</td><td>No</td><td>Sí</td></tr>
+  <tr><td>Crear productos, usuarios, cambiar precios</td><td>No</td><td>Sí</td></tr>
+</table>
+
+<div class="nota">
+  <strong>Por qué meter plata es libre y sacarla no</strong>
+  Nadie mete dinero de más a escondidas. Si hiciera falta autorización para eso, el fondo extra de
+  media mañana simplemente no se registraría, y el cierre aparecería con sobrante sin explicación. La
+  asimetría es deliberada.
+</div>
+
+<h3>La caja es del negocio, no del usuario</h3>
+<p>Hay una sola caja abierta a la vez, y cualquiera que entre trabaja sobre ella. El cajero abre a la
+mañana, el dueño cierra a la noche, y el turno registra a los dos. No existen cajas paralelas por
+usuario.</p>
+
+<!-- ============================================================ -->
+<h2 id="c4"><span class="num">4.</span> Configuración inicial</h2>
+
+<p>Está en <strong>Administración › Configuración</strong>. Se hace una vez y casi no se vuelve a
+tocar.</p>
+
+<h3>Datos del negocio</h3>
+<table>
+  <tr><th>Campo</th><th>Qué hace</th></tr>
+  <tr>
+    <td><strong>Nombre</strong></td>
+    <td>Aparece en los reportes que exportas.</td>
+  </tr>
+  <tr>
+    <td><strong>Moneda base</strong></td>
+    <td>La moneda en la que están los precios de todo el catálogo, y contra la que se calculan las
+    tasas. En Cuba, normalmente CUP. <strong>Es la decisión más importante de esta pantalla</strong>
+    y conviene no cambiarla después de cargar productos.</td>
+  </tr>
+  <tr>
+    <td><strong>Stock mínimo por defecto</strong></td>
+    <td>Con cuántas unidades un producto nuevo empieza a considerarse "poco stock". Se puede cambiar
+    producto por producto.</td>
+  </tr>
+  <tr>
+    <td><strong>Mostrarle el stock al cajero</strong></td>
+    <td>Si la pantalla de venta muestra cuántos quedan. Hay dueños que no quieren que su personal
+    conozca las existencias. Apagarlo no permite vender lo que no hay: solo lo esconde.</td>
+  </tr>
+  <tr>
+    <td><strong>Trabajar con cuentas abiertas</strong></td>
+    <td>Enciende el módulo de cafetería (capítulo 11). Apagarlo solo esconde esas pantallas; no borra
+    nada de lo que ya cargaste.</td>
+  </tr>
+  <tr>
+    <td><strong>Tolerancia de diferencia de caja</strong></td>
+    <td>Cuánto puede desviarse el efectivo contado, en porcentaje, antes de que el Panel lo trate
+    como un problema. Es porcentaje y no monto para que sirva igual en un quiosco y en un mercado.
+    Cero significa "avisame de cualquier diferencia".</td>
+  </tr>
+  <tr>
+    <td><strong>Margen mínimo</strong></td>
+    <td>Por debajo de este margen, el Panel señala el producto para que revises el precio o el costo.
+    Se mide sobre el precio de venta, así que va entre 0 y 100.</td>
+  </tr>
+</table>
+
+<h3>Monedas y tasas de cambio</h3>
+<p>Una moneda empieza a existir para la app cuando le cargas una tasa: cuántas unidades de la moneda
+base vale 1 unidad de ella. Si la base es CUP y el dólar está a 400, cargas <code>USD</code> con
+<code>400</code>.</p>
+
+<p><strong>CUP, CUPT y MLC vienen de fábrica</strong> y no se pueden eliminar. CUPT es el CUP que
+llega por transferencia (Transfermóvil, EnZona); MLC es el de tarjeta. A CUPT y MLC hay que ponerles
+tasa la primera vez: hasta entonces aparecen en la lista como "Falta la tasa" y no se ofrecen al
+cobrar. La tasa nunca viene puesta, porque un número viejo cobraría mal sin que nadie lo note.</p>
+
+<p>Cada moneda dice además si <strong>se cuenta en caja</strong>, es decir, si son billetes que van a
+la gaveta. CUP sí; CUPT y MLC no, porque viven en una cuenta, y eso no se puede cambiar. Para las
+monedas que agregues tú (USD, EUR…) lo decides con la casilla "Se cuenta en caja".</p>
+
+<h3>Fondo de caja</h3>
+<p>Con cuánto efectivo arranca la gaveta en <strong>cada turno</strong>, por moneda. Lo declaras una
+vez en la sección <strong>Fondo de caja</strong> y tocas <strong>Guardar fondo</strong>; desde ahí
+cada turno lo toma solo al abrir y el cajero ya no lo escribe. Pon cero en las monedas que no dejas en
+la gaveta. CUPT y MLC no llevan fondo, porque viven en una cuenta.</p>
+<p>Si lo cambias con la caja abierta, el turno que está andando sigue con el fondo con que abrió; el
+nuevo vale desde la próxima apertura. Mientras no lo declares, los turnos abren en cero y la
+pantalla de apertura lo avisa.</p>
+
+<div class="nota">
+  <strong>Por qué importa si se cuenta en caja</strong>
+  Al cerrar, las monedas en billetes se cuentan en la gaveta, y CUPT y MLC se reportan aparte, en
+  "Lo que entró a la cuenta", mirando el banco. Si se mezclaran, una transferencia de más taparía un
+  faltante de billetes (o al revés) y el cierre diría que cuadra cuando no.
+</div>
+
+<p>Cada cambio de tasa <strong>crea un registro nuevo</strong>, no pisa el anterior, así que queda el
+historial. Toca una moneda de la lista "Vigentes" para traerla al formulario y cambiarle la tasa.</p>
+
+<h4>Eliminar una moneda</h4>
+<p>Al tocar una moneda de la lista aparece el botón <strong>Eliminar</strong>. Sirve sobre todo para
+el código mal tecleado — <code>EURO</code> en vez de <code>EUR</code> — que si no se queda para
+siempre en el selector del cobro y en la lista del conteo del cierre.</p>
+<p>No se puede eliminar en tres casos:</p>
+<ul>
+  <li><strong>La moneda base</strong>, porque los precios están expresados en ella. Para dejar de
+  usarla hay que cambiar antes la moneda base del negocio.</li>
+  <li><strong>Una moneda que tiene dinero en la caja abierta.</strong> Si se borrara, el cierre no
+  tendría dónde declarar ese dinero e inventaría un faltante. Hay que esperar a cerrar el turno.</li>
+  <li><strong>Si eres cajero.</strong> Es configuración del negocio.</li>
+</ul>
+<p>Las ventas ya cobradas en esa moneda se conservan. Lo único que pierden es la tasa para
+convertirlas en los reportes.</p>
+
+<h3>Licencia</h3>
+<p>Abajo de todo está el código de este dispositivo (el mismo de la activación, repetido acá porque
+la pantalla de activación no se vuelve a ver) y el estado del premium, con el campo para canjear una
+clave de renovación.</p>
+
+<!-- ============================================================ -->
+<h2 id="c5"><span class="num">5.</span> El turno, de principio a fin</h2>
+
+<p>Este es el ciclo normal de un día. Todo lo demás son detalles de este ciclo.</p>
+
+<ol class="pasos">
+  <li><strong>Entrar.</strong> Eliges tu usuario y escribes el PIN. Si hay un solo usuario, se salta
+  directo al PIN.</li>
+  <li><strong>Abrir caja.</strong> La pantalla muestra el fondo con que arranca la gaveta, el que fijó
+  el administrador en Configuración. Cuéntalo, y si está completo toca <strong>Abrir turno</strong>.
+  No hay que escribir nada.</li>
+  <li><strong>Vender</strong> durante el turno.</li>
+  <li><strong>Registrar lo que no es venta</strong>: compras, retiros, el fondo que agregaste a media
+  mañana.</li>
+  <li><strong>Cerrar caja.</strong> Cuentas lo que hay realmente y la app compara contra lo que
+  debería haber.</li>
+  <li><strong>Cerrar sesión</strong> para que entre el cajero siguiente.</li>
+</ol>
+
+<div class="aviso">
+  <strong>El fondo tiene que estar en la gaveta</strong>
+  El turno abre con el fondo fijo, haya lo que haya en la gaveta. Si el fondo dice 2000 CUP y en la
+  gaveta hay 1500, al cierre van a faltar 500 y la app lo va a marcar como descuadre. Cuéntalo antes de
+  abrir y, si no está completo, avisa al administrador antes de vender.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c6"><span class="num">6.</span> Vender</h2>
+
+<p>La pantalla de Venta tiene tres columnas: las cuentas a la izquierda, el catálogo en el medio y el
+carrito a la derecha.</p>
+
+<h3>Armar el carrito</h3>
+<ul>
+  <li><strong>Busca</strong> escribiendo el nombre en el campo de arriba. El cursor ya está ahí
+  cuando entrás a la pantalla, así que puedes teclear (o pasar un lector de código de barras) sin
+  hacer clic.</li>
+  <li><strong>Toca el producto</strong> en el catálogo para agregarlo.</li>
+  <li><strong>Los grupos</strong> (Bebidas, Comidas…) filtran el catálogo. Se crean en
+  Administración › Productos.</li>
+</ul>
+
+<h3>Cómo leer una tarjeta de producto</h3>
+<table>
+  <tr><th>Se ve así</th><th>Significa</th></tr>
+  <tr><td>Normal</td><td>Hay existencia suficiente</td></tr>
+  <tr><td>Fondo naranja claro</td><td>Queda poco: está en el stock mínimo o por debajo</td></tr>
+  <tr><td>Gris y apagada</td><td>Sin stock. No se puede tocar</td></tr>
+</table>
+
+<h3>Cambiar cantidades</h3>
+<p>Toca la línea del carrito y usa el teclado numérico para poner la cantidad. Desde ahí también se
+quita la línea.</p>
+
+<div class="nota">
+  <strong>No se puede vender lo que no hay</strong>
+  La app lo impide. Si el estante tiene mercancía que la app no conoce, regístrala primero como
+  entrada de mercancía (capítulo 10) en vez de forzar la venta.
+</div>
+
+<h3>Anular una venta</h3>
+<p>En <strong>Ventas del turno</strong> puedes anular una venta mal registrada. Devuelve el stock,
+deshace el movimiento de efectivo y deja la venta marcada como anulada, con el motivo. No la borra:
+queda el rastro.</p>
+
+<div class="aviso">
+  <strong>Solo del turno abierto</strong>
+  Una venta de un turno ya cerrado no se puede anular: el conteo de ese cierre ya incorporó ese
+  dinero, y revertirlo ahora descuadraría un turno que ya cuadró. Un error que se descubre después se
+  corrige con un movimiento manual en el turno nuevo.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c7"><span class="num">7.</span> Cobrar</h2>
+
+<p>El botón <strong>Cobrar</strong> abre un panel que ocupa la pantalla entera. El cursor cae solo en
+el campo del monto, así que puedes teclear la cifra sin hacer clic.</p>
+
+<h3>Solo se elige la moneda</h3>
+<p>Cada tramo de pago se cobra en una moneda, y <strong>la moneda dice si es efectivo o
+transferencia</strong>: CUPT y MLC son transferencia; CUP, USD y EUR son efectivo. No hay que
+elegir nada más. Debajo del monto se lee, por ejemplo, "Monto en CUPT · Transferencia".</p>
+
+<h3>Pago mixto</h3>
+<p>Puedes cargar varios tramos: parte en USD, parte en CUPT. Cada
+<em>Agregar pago</em> suma un tramo a la lista. El panel muestra en todo momento el total, lo pagado
+y lo que falta o el vuelto.</p>
+
+<p><strong>Importe exacto</strong> carga de una lo que falta, en la moneda elegida.</p>
+
+<div class="nota">
+  <strong>El vuelto sale siempre en CUP y de la gaveta</strong>
+  Aunque el cliente pague en USD o transfiera de más, el vuelto se le da en billetes de CUP. Si según
+  la caja no había CUP para darlo (por ejemplo, se abrió con fondo 0 en CUP), la app lo avisa al
+  lado del vuelto. La venta vale igual; lo que conviene es registrar en <em>Movimiento</em>, como
+  entrada, de dónde salió ese dinero. Si no, el cierre lo va a mostrar como una diferencia.
+</div>
+
+<div class="bien">
+  <strong>El vuelto se ve antes de registrar</strong>
+  Está a la vista mientras cuentas el dinero, no después de guardar la venta.
+</div>
+
+<div class="aviso">
+  <strong>Volver descarta los pagos cargados</strong>
+  Es a propósito: volver atrás es arrepentirse del cobro, y dejar los tramos puestos haría que el
+  intento siguiente arrancara con dinero de un cobro cancelado.
+</div>
+
+<h3>El ticket impreso</h3>
+<p>Si el equipo tiene una impresora configurada, al terminar de cobrar el ticket sale solo. En el
+panel de cobro hay una casilla <strong>Imprimir el ticket</strong>, marcada de entrada, que permite
+saltarlo en una venta suelta: el cliente que no lo quiere, el rollo que se está acabando. Se vuelve
+a marcar sola en la venta siguiente — desmarcarla es una excepción, no un cambio de criterio.</p>
+
+<p>El ticket lleva el nombre del negocio, la fecha y hora, quién atendió, el número corto de la
+venta, los productos con cantidad y precio unitario, el total, <strong>cada tramo de pago con su
+moneda y su medio</strong>, y el vuelto si lo hubo.</p>
+
+<p>Para imprimirlo <strong>sin cobrar</strong> —el cliente que vuelve a pedirlo, el papel que se
+trabó— está el botón <em>Imprimir ticket</em> en <strong>Ventas del turno</strong>, sobre la venta
+que se elija. Funciona también sobre una venta anulada: el papel sale marcado "VENTA ANULADA" con su
+motivo, porque un ticket de una venta anulada no puede circular como comprobante válido.</p>
+
+<div class="bien">
+  <strong>Que no imprima nunca impide cobrar</strong>
+  La venta se registra primero y el ticket se manda después. Si la impresora está apagada, sin papel
+  o desconectada, aparece un aviso al lado del vuelto y la venta queda hecha igual. Después se
+  reimprime desde Ventas del turno.
+</div>
+
+<h3>Configurar la impresora</h3>
+<p>Se hace una sola vez por computadora, en <strong>Administración → Configuración</strong>, al final
+de la columna izquierda. Si no se elige ninguna impresora, la caja funciona como si esta sección no
+existiera.</p>
+
+<p><strong>Casi siempre se configura sola.</strong> Si la computadora no tiene impresora elegida, la
+primera vez que se entra a Venta la app busca una térmica entre las instaladas en Windows, deduce el
+ancho del papel y la deja lista. También está el botón <em>Detectar impresora de tickets</em>. Nunca
+elige una impresora de oficina. Si guardas "(ninguna)" a mano, deja de buscar sola. Lo que no puede
+hacer es encontrar una impresora que Windows todavía no tenga instalada.</p>
+
+<ul>
+  <li><strong>Impresora:</strong> una de las instaladas en Windows. "(ninguna)" apaga la impresión en
+    ese equipo.</li>
+  <li><strong>Ancho del papel:</strong> 58 mm (32 caracteres) u 80 mm (48). Sale del rollo, no del
+    modelo de impresora.</li>
+  <li><strong>Cómo mandarle el ticket:</strong> <em>Directo</em> es lo normal en una térmica: sale
+    rápido y corta el papel. Si no sale nada, <em>Por el driver</em> dibuja el ticket como una página
+    y funciona con cualquier impresora, incluida una multifunción de oficina.</li>
+  <li><strong>Cortar el papel:</strong> se desmarca si la impresora no tiene cuchilla.</li>
+  <li><strong>Imprimir sin acentos:</strong> viene marcado. Muchas térmicas no tienen tildes ni eñe y
+    sacan "CafÚ" en vez de "Café"; sin acentos se lee bien en cualquiera.</li>
+</ul>
+
+<div class="nota">
+  <strong>Imprimir prueba</strong>
+  El botón saca un ticket de muestra con los ajustes que estén en pantalla, sin guardarlos. Lleva a
+  propósito un nombre largo, un acento, una eñe y una columna de importes: son las tres preguntas que
+  solo se contestan mirando el papel. Se prueba, se corrige el ancho o el modo, se vuelve a probar, y
+  recién cuando sale bien se guarda.
+</div>
+
+<div class="beta">
+  <strong>Solo Windows, y sin probar en papel</strong>
+  En tablet Android no imprime: Android no tiene cola de impresión para térmicas. Y en Windows la
+  función está verificada hasta donde se puede sin tener una impresora delante, pero todavía nadie la
+  vio salir en papel. Si algo no cuadra con el ancho, el corte o los acentos, es justo lo que hay que
+  avisar.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c8"><span class="num">8.</span> Movimientos de caja</h2>
+
+<p>Todo el dinero que entra o sale de la gaveta y no es una venta se registra en
+<strong>Movimiento</strong>. Si no se registra, aparece como descuadre al cierre.</p>
+
+<table>
+  <tr><th>Situación</th><th>Qué registrar</th></tr>
+  <tr><td>Agregaste efectivo al fondo a media mañana</td><td>Entrada</td></tr>
+  <tr><td>Compraste bolsas con plata de la caja</td><td>Salida</td></tr>
+  <tr><td>Sacaste dinero para depositar</td><td>Salida</td></tr>
+  <tr><td>Un adelanto a un empleado</td><td>Salida</td></tr>
+</table>
+
+<p><strong>El motivo es obligatorio.</strong> Es lo único que después explica el movimiento cuando
+nadie se acuerda.</p>
+
+<div class="peligro">
+  <strong>Las salidas hechas por un cajero piden el PIN de un admin</strong>
+  Y queda registrado quién autorizó. Es el mismo mecanismo que el cierre descuadrado. Si en tu
+  negocio el dueño no está nunca, puedes quitarlo en Administración › Configuración ("Pedir el PIN
+  del administrador para sacar dinero de la caja"): la salida queda igual anotada con su motivo y la
+  ves en el cierre. Meter dinero nunca pide PIN.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c9"><span class="num">9.</span> Cerrar la caja</h2>
+
+<p>El cierre tiene cuatro pasos en una sola pantalla.</p>
+
+<h3>1. Contar el efectivo y lo que entró a la cuenta</h3>
+<p>Al lado de cada moneda, la columna <strong>DEBERÍA HABER</strong> dice lo que la app tiene
+registrado: fondo inicial + ventas en efectivo − vueltos − salidas + entradas. Escribe en CONTADO
+cuánto hay realmente en la gaveta.</p>
+
+<p>Debajo está <strong>Lo que entró a la cuenta</strong>: CUPT, MLC y cualquier otra moneda que no
+sea de billetes. Mira en la app del banco o en los mensajes cuánto entró en el turno y escríbelo en
+RECIBIDO. Una diferencia ahí se trata igual que una de efectivo.</p>
+
+<div class="nota">
+  <strong>Por qué van en dos tablas</strong>
+  Si la transferencia se sumara al conteo de CUP, el total sería el mismo, pero un faltante de
+  billetes quedaría tapado por una transferencia de más, y el cierre diría que cuadra. Separadas,
+  cada diferencia aparece donde está.
+</div>
+
+<h3>2. Existencias (opcional)</h3>
+<p>Una lista de los productos con lo que la app dice que debería quedar de cada uno, para que puedas
+mirarlo contra el estante. <strong>No hay que completar nada</strong>: escribe en CONTADO solo los
+que quieras cuadrar. Lo que dejes vacío no entra en el cierre.</p>
+<p>Si hay productos que no vale la pena ni mirar, sácalos de esta lista en Administración ›
+Productos.</p>
+
+<h3>3. Observaciones</h3>
+<p>Opcional si todo cuadra. <strong>Obligatoria si hay diferencias.</strong></p>
+
+<h3>4. Comprobar y cerrar</h3>
+<p><em>Comprobar</em> te muestra el resultado antes de cerrar nada. Si todo cuadra, <em>Cerrar
+caja</em> termina el turno.</p>
+
+<p>Si dice <strong>"Salieron X CUP más de los que entraron"</strong>, no es un error de conteo: se
+dieron vueltos en CUP sin que ese dinero estuviera declarado en la caja. Registra en
+<em>Movimiento</em> una entrada por ese dinero y vuelve a comprobar.</p>
+
+<div class="peligro">
+  <strong>Un turno no se cierra descuadrado por descuido</strong>
+  Si el dinero o las existencias no cuadran, la app rechaza el cierre. Para cerrar igual hace falta
+  el PIN de un administrador y una explicación escrita. El turno queda marcado como cerrado con
+  descuadre, con el nombre de quién autorizó.
+  <br><br>
+  El descuadre es un hecho real que a veces pasa, y el turno <em>tiene</em> que poder terminar. Lo
+  que no puede es terminar en silencio.
+</div>
+
+<h3>Después de cerrar</h3>
+<ul>
+  <li>El <strong>respaldo del cierre se guarda solo</strong>, sin que toques nada (capítulo 13).</li>
+  <li>Si todo cuadró, la app ofrece cerrar sesión con una cuenta regresiva, para el cambio de turno.
+  Cualquier botón la corta.</li>
+  <li>Si hubo diferencias, la sesión <strong>no</strong> se cierra sola: alguien tiene que ver el
+  número.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="c10"><span class="num">10.</span> Productos e inventario</h2>
+
+<p>En <strong>Administración › Productos</strong>.</p>
+
+<h3>Crear un producto</h3>
+<table>
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><strong>Nombre</strong></td><td>No se puede cambiar después. Las ventas viejas lo
+  guardan.</td></tr>
+  <tr><td><strong>Precio</strong></td><td>Tiene que estar en la moneda base. Un producto con precio
+  en otra moneda no se puede vender.</td></tr>
+  <tr><td><strong>Costo</strong></td><td><strong>Obligatorio.</strong> Sin él no se puede calcular
+  ganancia y el producto queda fuera de ese reporte. Puede estar en otra moneda que el precio
+  (costo en USD, venta en CUP es un caso normal).</td></tr>
+  <tr><td><strong>Stock inicial</strong></td><td>Solo al crear.</td></tr>
+  <tr><td><strong>Stock mínimo</strong></td><td>Desde cuántas unidades se considera "queda
+  poco".</td></tr>
+  <tr><td><strong>Contar en el cierre</strong></td><td>Si aparece en la lista de existencias del
+  cierre. Viene encendido.</td></tr>
+  <tr><td><strong>Foto</strong></td><td>Opcional. Ayuda muchísimo a encontrar el producto de un
+  vistazo en la pantalla de venta.</td></tr>
+  <tr><td><strong>Grupo</strong></td><td>Para filtrar el catálogo. Es solo para encontrarlo: no
+  cambia precio ni existencia.</td></tr>
+</table>
+
+<h3>Entrada de mercancía</h3>
+<p>Llega el proveedor y el dueño no está. El <strong>cajero puede registrar la entrada</strong> desde
+Operación › Entrada de mercancía: el stock sube en el acto y la entrada queda
+<strong>pendiente</strong> de que un admin le dé el visto bueno.</p>
+
+<div class="nota">
+  <strong>Por qué suma primero y se aprueba después</strong>
+  Si esperara aprobación para sumar, el cajero no podría vender lo que tiene delante y el cierre
+  contaría contra un número que ya se sabe viejo. El control es posterior, igual que el descuadre
+  autorizado.
+  <br><br>
+  Esta pantalla <strong>solo suma</strong>. Para restar existencia el cajero tiene la Baja de
+  mercancía, que tiene sus propias reglas (ver abajo).
+</div>
+
+<p><strong>PIN opcional.</strong> Si quieres que ninguna entrada pase sin que estés, enciende en
+Administración › Configuración la casilla "Pedir el PIN del administrador para dar entrada a
+mercancía". Viene <strong>apagada</strong>, porque esta pantalla existe justamente para cuando no
+estás. Encendida, tienes que teclear tu PIN para que la entrada pase y queda guardado que la
+autorizaste. Encendida o apagada, la entrada del cajero te sigue quedando como pendiente en
+Productos.</p>
+
+<p>El admin revisa las entradas pendientes en Productos y, al aprobarlas, puede además cargar el
+<strong>costo unitario</strong> de esa compra. Si lo hace, ese pasa a ser el costo del producto
+(el de la última compra). Lo ya vendido no cambia: cada venta guardó el costo que tenía ese día.</p>
+
+<h3>Baja de mercancía (la hace el cajero)</h3>
+<p>Para lo que sale del estante sin pasar por una venta: se rompió, se venció, se regaló. Está en
+<strong>Operación → Baja de mercancía</strong>, al lado de la entrada, y es el espejo de un egreso de
+caja pero en productos en vez de dinero.</p>
+
+<p>Se elige el producto, cuántas unidades salen y <strong>por qué</strong>. El motivo es obligatorio:
+es lo único que después distingue "se cayó la bandeja" de un faltante sin explicación. La existencia
+baja en el acto, igual que la entrada sube en el acto.</p>
+
+<p>Tiene dos controles, y uno de los dos se puede apagar:</p>
+
+<ul>
+  <li><strong>El PIN del administrador, antes.</strong> Viene encendido: el cajero no puede dar de
+    baja nada sin que un administrador teclee su PIN, y queda registrado quién autorizó. Se apaga en
+    <strong>Configuración</strong>, para el negocio donde el dueño no está nunca y exigirlo consigue
+    lo contrario de lo que busca — que la baja no se registre y el cierre no cuadre.</li>
+  <li><strong>La revisión, después.</strong> No se puede apagar. Toda baja hecha por un cajero queda
+    pendiente de que un administrador la mire, en Productos, junto a las entradas.</li>
+</ul>
+
+<p>Un administrador que use esta pantalla no teclea ningún PIN —ya entró con él— y su baja no queda
+pendiente de nadie.</p>
+
+<p>No se puede dar de baja un producto desactivado, ni más unidades de las que hay.</p>
+
+<h3>Ajustar existencias (solo admin)</h3>
+<p>Para restar: mercancía vencida, rota, robada. Pide motivo y queda en el historial.</p>
+<p>Las dos bajas, esta y la del cajero, descuentan la misma existencia y guardan lo que costaba
+cada unidad ese día. Eso es lo que el reporte de ganancia resta como <strong>mermas</strong>.</p>
+
+<h3>Desactivar contra borrar</h3>
+<p>La lista de Productos muestra de entrada solo los <strong>activos</strong>. Los desactivados están
+a un toque, en el filtro <strong>Inactivos</strong> (o en <strong>Todos</strong>), para reactivarlos o
+corregirles algo.</p>
+<table>
+  <tr><th></th><th>Desactivar</th><th>Borrar</th></tr>
+  <tr><td><strong>Para qué</strong></td><td>El producto existió y hoy no se vende</td><td>El producto
+  nunca debió existir: se cargó dos veces, se escribió mal</td></tr>
+  <tr><td><strong>Se puede si…</strong></td><td>Siempre</td><td>Nunca se vendió</td></tr>
+  <tr><td><strong>El histórico</strong></td><td>Se conserva</td><td>No hay histórico que
+  conservar</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="c11"><span class="num">11.</span> Cuentas abiertas</h2>
+
+<p>El modelo de una cafetería: el cliente se sienta, pide, vuelve a pedir, y paga al final. Mientras
+tanto conviven varias cuentas a la vez.</p>
+<p>En la pantalla de Venta, la columna izquierda tiene <strong>Mostrador</strong> (la venta normal, de
+una sola pasada) y las cuentas abiertas. <em>+ Nueva cuenta</em> crea una; el nombre es texto libre:
+"Mesa 4", "Para llevar", "Juan".</p>
+
+<div class="nota">
+  <strong>Una cuenta abierta no toca el inventario</strong>
+  Abrirla, agregarle cosas y sacarle cosas no mueve existencias. Recién al <strong>cobrarla</strong>
+  se registra una venta normal, y es esa venta la que descuenta stock y entra al turno. Por eso una
+  cuenta que se modifica diez veces, o que se cae, no deja rastro en el inventario.
+</div>
+
+<p>Cancelar una cuenta no revierte nada, justamente porque nunca descontó nada.</p>
+
+<!-- ============================================================ -->
+<h2 id="c12"><span class="num">12.</span> Panel, alertas y reportes</h2>
+
+<h3>El Panel</h3>
+<p>Es la primera pantalla de Administración y responde una sola pregunta: <em>¿cómo me fue y hay algo
+que revisar?</em> Arranca en HOY, con Ayer, Últimos 7 días y Este mes a un toque.</p>
+
+<p>Muestra, en este orden: el semáforo de alertas, los indicadores por moneda (vendido, ganancia,
+margen, operaciones, ticket promedio, diferencia de caja), ventas/anuladas/agotados, las alertas en
+detalle, los cinco productos que más dejaron, y el inventario a costo.</p>
+
+<div class="nota">
+  <strong>Las alertas van arriba de los números, a propósito</strong>
+  Un panel que abre con el total vendido invita a mirar el número lindo y cerrar. El faltante de la
+  tarde tiene que aparecer primero.
+</div>
+
+<h3>Las siete alertas</h3>
+<table>
+  <tr><th>Alerta</th><th>Cuándo aparece</th></tr>
+  <tr><td><strong>Diferencia de caja</strong></td><td>Un cierre no cuadró. El nivel depende de
+  cuánto se desvió respecto a tu tolerancia, y un faltante pesa más que un sobrante.</td></tr>
+  <tr><td><strong>Diferencia de inventario</strong></td><td>Lo contado de un producto no coincide con
+  lo esperado.</td></tr>
+  <tr><td><strong>Ventas anuladas</strong></td><td>Hubo muchas anulaciones respecto del total.</td></tr>
+  <tr><td><strong>Producto agotado</strong></td><td>Se quedó en cero. Cada hora en cero es venta que
+  no ocurre.</td></tr>
+  <tr><td><strong>Stock bajo</strong></td><td>Llegó al mínimo que configuraste.</td></tr>
+  <tr><td><strong>Producto vendido bajo costo</strong></td><td>Se vendió por menos de lo que costó.
+  Es la única alerta <em>crítica</em> y se avisa siempre, sin importar el margen mínimo.</td></tr>
+  <tr><td><strong>Margen bajo</strong></td><td>El margen quedó por debajo del mínimo que
+  configuraste.</td></tr>
+</table>
+
+<div class="bien">
+  <strong>Una alerta es un cálculo, no una acusación</strong>
+  Cada una sale de una resta que podrías hacer a mano. Los textos describen lo que los números dicen
+  y dónde mirar; ninguno concluye quién hizo qué. Un faltante puede ser un robo o un vuelto mal dado,
+  y el sistema no puede distinguirlos. Eso lo decides tú, que conoces a tu gente.
+</div>
+
+<h3>Los reportes</h3>
+<table>
+  <tr><th>Reporte</th><th>Responde</th></tr>
+  <tr><td><strong>Ventas</strong></td><td>Cuánto se vendió, por moneda, y qué productos salieron
+  más.</td></tr>
+  <tr><td><strong>Ganancia</strong></td><td>Ingresos, costos, ganancia bruta, mermas (lo que costaba
+  la mercancía dada de baja) y la ganancia después de mermas.</td></tr>
+  <tr><td><strong>Productos</strong></td><td>Rentabilidad producto por producto: unidades, ingresos,
+  costo, margen y participación.</td></tr>
+  <tr><td><strong>Cajeros</strong></td><td>Ventas, anulaciones y diferencias de caja por
+  persona.</td></tr>
+  <tr><td><strong>Monedas</strong></td><td>Qué pasó con cada moneda: vendido, recibido, movimientos y
+  cuadre.</td></tr>
+  <tr><td><strong>Inventario</strong></td><td>Qué hay hoy y cuánto vale, a precio y a costo.</td></tr>
+  <tr><td><strong>Movimientos de caja</strong></td><td>Entradas y salidas que no son ventas.</td></tr>
+  <tr><td><strong>Completo</strong></td><td>Todos juntos en un solo documento.</td></tr>
+</table>
+
+<div class="aviso">
+  <strong>Dos cosas que conviene saber al leerlos</strong>
+  Las <strong>ventas anuladas no entran en ningún total</strong>: su dinero se revirtió y su mercancía
+  volvió al inventario. Y el <strong>inventario es la foto de hoy</strong>, no del período elegido: el
+  stock no guarda historia.
+</div>
+
+<h3>Exportar</h3>
+<p>Dos botones: <strong>Excel</strong> y <strong>PDF</strong>.</p>
+<ul>
+  <li>El <strong>Excel</strong> sale como <code>.xlsx</code> de verdad, una hoja por tabla, y los
+  números son números: puedes sumarlos, ordenarlos y graficarlos.</li>
+  <li>El <strong>PDF</strong> sale listo para mandar o imprimir, sin pasos intermedios.</li>
+</ul>
+<p>En Windows el archivo <strong>se abre solo</strong> al terminar. En tablet se ofrece compartirlo,
+que es el camino directo a WhatsApp. El botón <em>Ver la carpeta</em> te lleva al archivo si prefieres
+copiarlo a un pendrive.</p>
+
+<div class="nota">
+  <strong>La primera vez que abres un Excel</strong>
+  Windows puede preguntarte con qué programa abrirlo. Elige Excel y marca que lo recuerde: es una vez
+  sola.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c13"><span class="num">13.</span> Respaldos y cierres</h2>
+
+<h3>Cada cierre se guarda solo</h3>
+<p>Al cerrar la caja, la app escribe un archivo con todo el cierre: movimientos, diferencias por
+moneda, conteo de existencias, observaciones y quién autorizó si hubo descuadre.
+<strong>No hay que acordarse de nada.</strong></p>
+
+<div class="nota">
+  <strong>Por qué dejó de ser un botón</strong>
+  Era opcional, y el resultado fue el previsible: el turno que se cierra apurado y de noche no se
+  exportaba nunca, y los respaldos que existían eran los de los días en que no hacían falta. Un
+  respaldo que depende de que alguien se acuerde no es un respaldo.
+</div>
+
+<p>Si por alguna razón no se pudo escribir el archivo (disco lleno, carpeta sin permisos), <strong>el
+turno queda cerrado igual</strong> y la app te avisa. El respaldo se puede regenerar después.</p>
+
+<h3>Administración › Cierres</h3>
+<p>La historia de cierres. Por cada uno vas a ver:</p>
+<ul>
+  <li>Cuándo se abrió y cuándo se cerró</li>
+  <li>Quién abrió y quién cerró (pueden ser personas distintas)</li>
+  <li>Cuántas ventas hubo</li>
+  <li>Esperado, contado y diferencia, moneda por moneda</li>
+  <li>Las observaciones que se escribieron</li>
+  <li>Si quedó marcado como cerrado con descuadre autorizado</li>
+</ul>
+<p>Los cierres que no cuadraron se pintan distinto: son los únicos que alguien tiene que leer de
+verdad. Arriba aparece cuántos hay para revisar.</p>
+
+<p>Con un cierre elegido puedes sacar su <strong>PDF</strong> (para leerlo, imprimirlo o mandarlo
+por WhatsApp), <strong>Compartir el respaldo</strong> (el archivo para importar en otra caja),
+<strong>Volver a guardar</strong> el respaldo si falta, o <strong>Ver la carpeta</strong>.</p>
+
+<div class="nota">
+  <strong>PDF y respaldo no son lo mismo</strong>
+  El PDF es para que lo lea una persona. El respaldo es un archivo <em>.json</em> que solo sirve para
+  importarlo en otra copia de Caishen: si lo abres con doble clic no vas a ver nada útil, y
+  algunos programas (Adobe, por ejemplo) dicen que está dañado. No lo está. Por eso en Windows el
+  botón del respaldo te muestra la carpeta con el archivo seleccionado en vez de abrirlo.
+  El PDF se puede sacar también al terminar el cierre, con <em>Ver el cierre en PDF</em>.
+</div>
+
+<div class="nota">
+  <strong>Esta pantalla lee de la base, no de los archivos</strong>
+  Los dos dicen lo mismo, pero un archivo se puede borrar o mover. Una pantalla para auditar que se
+  queda ciega porque alguien limpió una carpeta no sirve para auditar. Por eso, si a un cierre le
+  falta su archivo, la app te lo dice en vez de esconder el cierre.
+</div>
+
+<h3>Dónde están los archivos</h3>
+<p>En una carpeta interna de Windows, que no hace falta que busques a mano — usa los botones de la
+app. Si aun así la necesitas, el botón <em>Ver la carpeta</em> te la abre con el archivo ya
+seleccionado.</p>
+
+<div class="peligro">
+  <strong>Qué pasa si se rompe el equipo</strong>
+  Los datos viven solo ahí. No hay copia en ninguna nube. Si el equipo se pierde o el disco muere,
+  se pierde todo lo que no hayas sacado de la máquina.
+  <br><br>
+  <strong>Recomendación:</strong> comparte el archivo de cierre a un teléfono o pendrive con alguna
+  regularidad. Es chico y es lo que permite reconstruir qué pasó.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="c14"><span class="num">14.</span> Problemas frecuentes</h2>
+
+<h4>Arriba dice "prueba terminada: solo lectura" y no puedo vender</h4>
+<p>Pasaron los 7 días de prueba sin activar. Tus datos están intactos: entra como administrador,
+toca <em>Activar con mi clave</em> (o <em>Activar Caishen</em> en el menú), mándame el código y
+escribe la clave que te devuelvo. Al activar vuelve todo, con lo que cargaste durante la prueba.</p>
+
+<h4>Olvidé el PIN del administrador</h4>
+<p>No hay forma de recuperarlo, por diseño: no hay servidor que pueda verificar quién eres. Si hay otro
+usuario admin, entra con ese y cambia el PIN del primero. Si no, escríbeme.</p>
+
+<h4>Al cierre me sobra o me falta plata</h4>
+<p>Repasa en este orden:</p>
+<ol>
+  <li>¿Estaba completo el fondo en la gaveta al abrir? ¿Y el fondo de Configuración es el que de
+  verdad se deja en la caja?</li>
+  <li>¿Registraste todas las compras y retiros en Movimiento?</li>
+  <li>¿Hay cobros por transferencia que estás buscando entre los billetes? Esos no están en la
+  gaveta: van en "Lo que entró a la cuenta".</li>
+  <li>¿Alguna venta se cobró en la moneda equivocada?</li>
+</ol>
+
+<h4>Un producto aparece sin stock pero lo tengo en el estante</h4>
+<p>La app no lo sabe todavía. Regístralo como <strong>entrada de mercancía</strong>. No fuerces la
+venta por otro camino: el cierre te lo va a marcar igual.</p>
+
+<h4>Toco "Excel" y se abre una ventana preguntando con qué programa abrirlo</h4>
+<p>Windows no tiene un programa por defecto para ese tipo de archivo en tu usuario. Elige Excel y
+marca que lo recuerde. Es una sola vez.</p>
+
+<h4>El reporte se exportó pero no encuentro el archivo</h4>
+<p>Usa el botón <strong>Ver la carpeta</strong>, que lo abre con el archivo seleccionado.</p>
+
+<h4>Cambié la tasa del dólar y las ventas viejas cambiaron de valor</h4>
+<p>No cambiaron. Cada venta guarda el monto tal como se cobró. Lo que usa la tasa vigente es la
+conversión que muestran algunos reportes.</p>
+
+<h4>Necesito hacer una devolución</h4>
+<p>Si es del turno abierto, anula la venta. Si es de un turno cerrado, registra una salida de dinero
+en Movimiento con el motivo, y si corresponde ajusta la existencia.</p>
+
+<h4>Tengo dos equipos y quiero que vean lo mismo</h4>
+<p>No se sincronizan solos, y no lo van a hacer: la app es 100% offline por diseño. Lo que sí puedes es
+compartir el archivo de cierre de un equipo y leerlo en el otro.</p>
+
+<!-- ============================================================ -->
+<h2 id="c15"><span class="num">15.</span> Glosario</h2>
+
+<dl class="glosario">
+  <dt>Turno (o caja)</dt>
+  <dd>El período entre que se abre la caja con un fondo y se cierra contando lo que hay. Hay uno
+  abierto a la vez, y es del negocio, no de la persona.</dd>
+
+  <dt>Fondo inicial</dt>
+  <dd>El efectivo con el que arranca la gaveta, por moneda. Es el fondo fijo que declara el
+  administrador en Configuración; cada turno lo toma solo al abrir.</dd>
+
+  <dt>Moneda base</dt>
+  <dd>La moneda en la que están los precios del catálogo y contra la que se calculan las tasas.</dd>
+
+  <dt>Tasa de cambio</dt>
+  <dd>Cuántas unidades de la moneda base vale 1 unidad de otra moneda.</dd>
+
+  <dt>Medio de pago</dt>
+  <dd>Efectivo o transferencia. Lo decide la moneda: CUPT y MLC son transferencia, el resto
+  efectivo. Solo el efectivo se cuenta al cerrar.</dd>
+
+  <dt>Descuadre</dt>
+  <dd>Diferencia entre lo que debería haber y lo que hay. Se puede cerrar con descuadre, pero hace
+  falta el PIN de un admin y una explicación.</dd>
+
+  <dt>Tolerancia</dt>
+  <dd>Cuánto puede desviarse el efectivo, en porcentaje, antes de que el Panel lo trate como
+  problema.</dd>
+
+  <dt>Stock mínimo</dt>
+  <dd>Desde cuántas unidades un producto se considera "queda poco".</dd>
+
+  <dt>Cuenta abierta (comanda)</dt>
+  <dd>Lo que un cliente lleva pedido y no pagó. No toca el inventario hasta que se cobra.</dd>
+
+  <dt>Margen</dt>
+  <dd>Qué parte del precio de venta es ganancia, en porcentaje.</dd>
+
+  <dt>Entrada de mercancía</dt>
+  <dd>Registro de la mercancía que llega. El cajero puede hacerla y queda pendiente de que un admin
+  la apruebe.</dd>
+
+  <dt>Activación</dt>
+  <dd>La clave perpetua que habilita la app en un equipo concreto.</dd>
+
+  <dt>Premium</dt>
+  <dd>Soporte y funciones extra. Vence, pero su vencimiento nunca impide vender.</dd>
+</dl>
+
+<footer>
+  <p><strong>Caishen 1.0</strong> — manual del 26 de octubre de 2026. Cubre las versiones para
+  Windows y Android; el empaquetado para iPhone y iPad todavía no está disponible.</p>
+  <p>Para imprimirlo o guardarlo como PDF: <em>Ctrl + P</em> y elige "Guardar como PDF".</p>
+</footer>
+
+</main>
+</body>
+</html>
