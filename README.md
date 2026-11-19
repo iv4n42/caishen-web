@@ -10,7 +10,7 @@ privado y nunca se copia aquí.
 
 - `index.html`: la página.
 - `manual.html`: copia de `Distribucion/Caishen-Manual.html` del repo de la app.
-- `img/`: ícono, moneda e imagen para compartir (de `Distribucion/Marca`), y las capturas en WebP (`venta`, `cobro`, `panel`, `cierre`), sacadas del emulador de tablet con un negocio de demostración («Cafeteria La Ceiba»).
+- `img/`: ícono, moneda e imagen para compartir (de `Distribucion/Marca`), y las capturas en WebP (`venta`, `venta-oscuro`, `cobro`, `panel-oscuro`, `cierre`), sacadas del emulador de tablet con un negocio de demostración («Cafeteria La Ceiba»).
 
 ## Publicar una versión nueva
 

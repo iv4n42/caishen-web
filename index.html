@@ -112,6 +112,8 @@
   .captura figcaption { margin-top: 12px; font-size: 15px; color: var(--carbon-suave); }
   .captura figcaption b { color: var(--tierra-media); }
   .captura.principal { margin-bottom: 28px; }
+  .captura.oscuro { margin: 40px 0 0; }
+  .captura.oscuro .marco { background: #000; }
   .captura.principal .marco { padding: 12px; border-radius: 22px; }
   .marco { display: block; }
   .filas { display: grid; gap: 32px; }
@@ -307,17 +309,17 @@
       <p class="entrada">Capturas reales de Caishen 1.8 en una tablet de 10 pulgadas. En la PC con Windows se ve igual.</p>
 
       <figure class="captura principal">
-        <div class="marco"><img src="img/venta.webp" width="1280" height="716" loading="lazy" alt="Pantalla de venta: a la izquierda las cuentas abiertas por mesa, al centro el catálogo con precios y existencias, a la derecha el pedido de la Mesa 4 con su total y el teclado de cantidades."></div>
-        <figcaption><b>Vender.</b> Catálogo con precio y existencias, cuentas abiertas por mesa y el pedido a la derecha. Avisa lo que está por acabarse.</figcaption>
+        <div class="marco"><img src="img/venta.webp" width="1280" height="716" loading="lazy" alt="Pantalla de venta: a la izquierda las cuentas abiertas por mesa, al centro el catálogo con foto, precio y existencias de cada producto, a la derecha el pedido de la Mesa 4 con su total y el teclado de cantidades."></div>
+        <figcaption><b>Vender.</b> Cada producto con su foto, precio y existencias. Cuentas abiertas por mesa y el pedido a la derecha. Avisa lo que está por acabarse.</figcaption>
       </figure>
 
       <div class="filas">
         <figure class="captura fila">
-          <a class="marco" href="img/cobro.webp" target="_blank" rel="noopener"><img src="img/cobro.webp" width="730" height="480" loading="lazy" alt="Ventana de cobro: el cliente paga 5 USD por una cuenta de 1.790 CUP y Caishen calcula 260 CUP de vuelto."></a>
+          <a class="marco" href="img/cobro.webp" target="_blank" rel="noopener"><img src="img/cobro.webp" width="730" height="345" loading="lazy" alt="Ventana de cobro: el cliente paga 5 USD por una cuenta de 1.790 CUP y Caishen calcula 260 CUP de vuelto."></a>
           <figcaption><b>Cobrar en divisa.</b> El cliente paga con 5 USD una cuenta de 1.790 CUP. Caishen la convierte a la tasa del día y te dice el vuelto: 260 CUP. Se puede mezclar efectivo, divisa y transferencia en un mismo pago.</figcaption>
         </figure>
         <figure class="captura fila">
-          <a class="marco" href="img/panel.webp" target="_blank" rel="noopener"><img src="img/panel.webp" width="905" height="510" loading="lazy" alt="Panel del administrador: lo vendido en el día, la ganancia, el margen, el ticket promedio y una alerta de productos en el mínimo."></a>
+          <a class="marco" href="img/panel-oscuro.webp" target="_blank" rel="noopener"><img src="img/panel-oscuro.webp" width="905" height="510" loading="lazy" alt="Panel del administrador en modo oscuro: lo vendido en el día, la ganancia, el margen, el ticket promedio y una alerta de productos en el mínimo."></a>
           <figcaption><b>El día de un vistazo.</b> Lo vendido, la ganancia y el margen, si la caja cuadra, y qué productos hay que reponer antes de que se acaben.</figcaption>
         </figure>
         <figure class="captura fila">
@@ -325,6 +327,11 @@
           <figcaption><b>Cerrar la caja.</b> Para cada moneda, lo que debería haber en la gaveta y de dónde sale: fondo, ventas, vueltos y salidas. Cuentas, escribes lo que hay y Caishen te dice si cuadra.</figcaption>
         </figure>
       </div>
+
+      <figure class="captura principal oscuro">
+        <a class="marco" href="img/venta-oscuro.webp" target="_blank" rel="noopener"><img src="img/venta-oscuro.webp" width="1280" height="716" loading="lazy" alt="La misma pantalla de venta en modo oscuro: fondo casi negro, textos en oro y las fotos de los productos."></a>
+        <figcaption><b>También en modo oscuro.</b> Cansa menos la vista en locales con poca luz y en los turnos de noche. Se cambia con un toque desde el menú.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -474,7 +481,7 @@
 
 <footer class="pie">
   <div class="envoltura">
-    <span>© 2026 Caishen · Caja para pymes</span>
+    <span>© 2026 Caishen · Caja para pymes · Fotos de los productos de demostración: StockSnap y Rawpixel (CC0)</span>
     <span><a href="manual.html">Manual</a> · <a href="#descargar">Descargar</a> · <a href="#preguntas">Preguntas</a></span>
   </div>
 </footer>
