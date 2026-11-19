@@ -301,7 +301,7 @@
   </section>
 
   <!-- ===================== CAPTURAS =====================
-       Capturas reales de la tablet (tomadas con Caishen 1.8; la 1.9 se ve igual, 1280×800) con un negocio de demostración.
+       Capturas reales de la tablet (1280×800) con un negocio de demostración.
        Recortadas sin la barra de Android y en WebP para que pesen poco. -->
   <section id="capturas" class="sobre-blanco">
     <div class="envoltura">
@@ -345,7 +345,7 @@
         </div>
         <ul>
           <li><svg><use href="#i-check"/></svg><span><strong>7 días de prueba</strong> con todo funcionando. Si no te convence, no pagas nada.</span></li>
-          <li><svg><use href="#i-check"/></svg><span>Al terminar la prueba <strong>no se pierde nada</strong>: tus datos quedan y los puedes seguir consultando.</span></li>
+          <li><svg><use href="#i-check"/></svg><span>Al terminar la prueba <strong>no se pierde nada</strong>: tus datos quedan guardados y, al activar, sigues donde lo dejaste.</span></li>
           <li><svg><use href="#i-check"/></svg><span>La clave llega <strong>por WhatsApp</strong>, en un archivo que abres desde Caishen. Sin internet en el negocio.</span></li>
           <li><svg><use href="#i-check"/></svg><span>Una licencia <strong>por equipo</strong>. Las actualizaciones son gratis.</span></li>
         </ul>
@@ -356,7 +356,7 @@
   <!-- ===================== DESCARGAS ===================== -->
   <section id="descargar" class="sobre-blanco">
     <div class="envoltura">
-      <h2 class="titulo-seccion">Descargar Caishen 1.9</h2>
+      <h2 class="titulo-seccion">Descargar Caishen 1.10</h2>
       <p class="entrada">Baja el instalador de tu equipo. Si ya tienes Caishen, instala encima: tus datos y tu licencia se conservan.</p>
 
       <div class="rejilla dos">
@@ -366,11 +366,11 @@
             <div><h3>Windows</h3><span>PC o laptop</span></div>
           </div>
           <ul class="datos">
-            <li><b>Archivo:</b> Instalar-Caishen-1.9.exe</li>
+            <li><b>Archivo:</b> Instalar-Caishen-1.10.exe</li>
             <li><b>Tamaño:</b> 87 MB</li>
             <li><b>Requiere:</b> Windows 10 o 11 de 64 bits</li>
           </ul>
-          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.9/Instalar-Caishen-1.9.exe"><svg><use href="#i-bajar"/></svg>Descargar para Windows</a>
+          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.10/Instalar-Caishen-1.10.exe"><svg><use href="#i-bajar"/></svg>Descargar para Windows</a>
           <details>
             <summary>Cómo instalar</summary>
             <ol class="pasos">
@@ -378,7 +378,7 @@
               <li>Si Windows dice «Windows protegió su PC», toca <b>Más información</b> y luego <b>Ejecutar de todas formas</b>. Sale porque el instalador es nuevo y Windows todavía no lo conoce.</li>
               <li>Sigue los pasos del instalador. Al final, Caishen queda en el menú Inicio y en el Escritorio.</li>
             </ol>
-            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: 228a0f30961b730503b279e710f78c86f5938c885e55e0ab93bae79e855996f2</p>
+            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: 434c2b2b0f33f10ab2f2b834aa0bf9f4f3832316342071e7980f721592bfea1d</p>
           </details>
         </div>
 
@@ -388,11 +388,11 @@
             <div><h3>Android</h3><span>Tablet de 10" o más, en horizontal</span></div>
           </div>
           <ul class="datos">
-            <li><b>Archivo:</b> Caishen-1.9.apk</li>
+            <li><b>Archivo:</b> Caishen-1.10.apk</li>
             <li><b>Tamaño:</b> 56 MB</li>
             <li><b>Requiere:</b> tablet Android (no funciona en teléfonos)</li>
           </ul>
-          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.9/Caishen-1.9.apk"><svg><use href="#i-bajar"/></svg>Descargar para Android</a>
+          <a class="boton boton-laca" href="https://github.com/iv4n42/caishen-web/releases/download/v1.10/Caishen-1.10.apk"><svg><use href="#i-bajar"/></svg>Descargar para Android</a>
           <details>
             <summary>Cómo instalar</summary>
             <ol class="pasos">
@@ -400,7 +400,7 @@
               <li>Si Android pide permiso para instalar apps de este origen, actívalo y vuelve atrás.</li>
               <li>Toca <b>Instalar</b>. Caishen aparece con el ícono de la moneda.</li>
             </ol>
-            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: 39189aab2992b0f0dc6826c6ea5bc91f9fe80866f6faf715221eb15131ba8d5f</p>
+            <p class="huella" title="Para comprobar que el archivo llegó entero">SHA-256: e1cbe95d860d611c7ab5cc7a3524ff1813bd5412b44f2f6feb10bc04dce5b011</p>
           </details>
         </div>
       </div>
@@ -415,28 +415,33 @@
       <h2 class="titulo-seccion">Novedades</h2>
       <p class="entrada">Caishen mejora con lo que piden los negocios que lo usan. Esto es lo que trae cada versión.</p>
 
+      <!-- Solo lo que le interesa al cliente. Lo interno (seguridad, licencias, cómo está hecho por
+           dentro) va en una línea: «Ajustes internos». Cuando salga una versión nueva, la «Actual» pasa a Versiones anteriores. -->
       <div class="version">
-        <h3>Caishen 1.9 <span class="etiqueta">Actual</span></h3>
+        <h3>Caishen 1.10 <span class="etiqueta">Actual</span></h3>
         <time datetime="2026-11-19">19 de noviembre de 2026</time>
         <ul>
-          <li>Más seguridad en Android: la app comprueba que es la copia original firmada por nosotros. Una copia modificada por terceros deja de funcionar.</li>
-          <li>Para el uso diario no cambia nada. Si ya tienes Caishen, instala encima: tus datos y tu licencia se conservan.</li>
+          <li>En la tablet: si Caishen se cerraba con una venta a medias, al volver a abrirlo el botón «Cobrar» podía quedar fuera de la pantalla. Arreglado.</li>
+          <li>Ajustes internos de licencia y seguridad.</li>
         </ul>
       </div>
 
-      <!-- Versiones anteriores: cuando salga una versión nueva, el bloque .version de la que era
-           «Actual» pasa aquí dentro (sin la etiqueta) y la nueva va arriba. -->
       <details>
         <summary>Versiones anteriores</summary>
+        <div class="version">
+          <h3>Caishen 1.9</h3>
+          <time datetime="2026-11-19">19 de noviembre de 2026</time>
+          <ul>
+            <li>Ajustes internos de seguridad.</li>
+          </ul>
+        </div>
         <div class="version">
           <h3>Caishen 1.8</h3>
           <time datetime="2026-11-15">15 de noviembre de 2026</time>
           <ul>
-            <li>Anular una venta ahora pide confirmación y, si quien anula es cajero, el PIN del administrador. Se puede apagar en Configuración.</li>
-            <li>Queda registrado qué administrador autorizó cada anulación.</li>
-            <li>En el cierre, la columna de anuladas muestra con signo si el dinero salió o entró a la caja.</li>
-            <li>Las observaciones del cierre se leen bien en modo oscuro.</li>
-            <li>Los reportes exportados llevan la hora local en el nombre.</li>
+            <li>Anular una venta pide confirmación y, si quien anula es cajero, el PIN del administrador. Se puede apagar en Configuración. Queda anotado quién lo autorizó.</li>
+            <li>En el cierre de caja, las ventas anuladas muestran con signo si el dinero salió o volvió a la caja.</li>
+            <li>Mejor lectura en modo oscuro y correcciones menores.</li>
           </ul>
         </div>
       </details>
@@ -455,7 +460,7 @@
       </details>
       <details>
         <summary>¿Qué pasa cuando terminan los 7 días de prueba?</summary>
-        <p>Caishen pasa a solo lectura: no deja vender, pero tus productos, ventas y cierres siguen ahí. Cuando activas la licencia sigues donde lo dejaste.</p>
+        <p>Caishen se detiene hasta que lo actives: solo muestra la pantalla para poner la licencia y no deja vender, abrir la caja ni entrar a reportes o productos. Tus datos no se borran: al activar sigues exactamente donde lo dejaste.</p>
       </details>
       <details>
         <summary>¿Puedo usarlo en el teléfono?</summary>
